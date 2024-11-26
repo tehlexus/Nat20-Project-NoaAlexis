@@ -47,7 +47,7 @@ public class Monster : MonoBehaviour
             instanceBouleDeFeu = Instantiate<GameObject>(bouleDeFeu, positionSpawnBouleDeFeu, Quaternion.LookRotation(rotationBouleDeFeu));
             cptrAnim = 0;
         }
-        if (instanceBouleDeFeu.transform.position.z <= 0f && FireBallIsRunning)
+        if (instanceBouleDeFeu.transform.position.z <= -5.0f && FireBallIsRunning)
         {
             Destroy(instanceBouleDeFeu);
             FireBallIsRunning = false;
