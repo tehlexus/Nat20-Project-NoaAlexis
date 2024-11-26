@@ -10,6 +10,8 @@ public class Monster : MonoBehaviour
 {
 
     Animator AnnimationMonstre;
+    float cptrAnim;
+    float tempsAnimation;
 
     [SerializeField] public GameObject bouleDeFeu;
     private GameObject instanceBouleDeFeu;
@@ -17,6 +19,7 @@ public class Monster : MonoBehaviour
     private Transform monsterTransform;
     private Vector3 positionSpawnBouleDeFeu;
     private Vector3 rotationBouleDeFeu;
+    
 
 
     // Start is called before the first frame update
@@ -25,25 +28,29 @@ public class Monster : MonoBehaviour
         FireBallIsRunning = false;
         AnnimationMonstre = GetComponent<Animator>();
         monsterTransform = GameObject.Find("Monstre").GetComponent<Transform>();
-        positionSpawnBouleDeFeu = new Vector3(monsterTransform.position.x, monsterTransform.position.y + 1, monsterTransform.position.z + 0.5f);
+        positionSpawnBouleDeFeu = new Vector3(monsterTransform.position.x, monsterTransform.position.y + 1, monsterTransform.position.z - 0.5f);
         rotationBouleDeFeu = new Vector3(0,90,0);
+        cptrAnim = 0;
+        tempsAnimation = 2.7f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (0.3 < AnnimationMonstre.GetCurrentAnimatorStateInfo(0).normalizedTime && !FireBallIsRunning)
+        cptrAnim += Time.deltaTime;
+    }
+    private void FixedUpdate()
+    {
+        if (tempsAnimation < cptrAnim && FireBallIsRunning == false)
         {
             FireBallIsRunning = true;
             instanceBouleDeFeu = Instantiate<GameObject>(bouleDeFeu, positionSpawnBouleDeFeu, Quaternion.LookRotation(rotationBouleDeFeu));
-            
+            cptrAnim = 0;
         }
-        if(instanceBouleDeFeu.transform.position.z >= 10f && FireBallIsRunning)
+        if (instanceBouleDeFeu.transform.position.z <= 0f && FireBallIsRunning)
         {
             Destroy(instanceBouleDeFeu);
-            Debug.Log("Test");
             FireBallIsRunning = false;
         }
-        
     }
 }
