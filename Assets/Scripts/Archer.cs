@@ -8,10 +8,9 @@ public class Archer : MonoBehaviour
     float cptrAnim;
     float tempsAnimation;
 
-    [SerializeField] public GameObject Fleche;
+    [SerializeField] public GameObject fleche;
     private GameObject instanceDeFleche;
     private bool flecheIsRunning;
-    private Transform transformArcher;
     private Vector3 positionSpawnFleche;
     private Vector3 rotationFleche;
 
@@ -19,11 +18,11 @@ public class Archer : MonoBehaviour
     void Start()
     {
         cptrAnim = 0;
-        tempsAnimation = animationArcher.GetCurrentAnimatorStateInfo(0).length;
+        animationArcher = GetComponent<Animator>();
+        tempsAnimation = animationArcher.GetCurrentAnimatorStateInfo(0).length - 2;
         flecheIsRunning = false;
-        transformArcher = GameObject.Find("Archer").GetComponent<Transform>();
-        positionSpawnFleche = new Vector3(transformArcher.position.x + 0.5f, transformArcher.position.y, transformArcher.position.z + 0.5f);
-        rotationFleche = new Vector3(transformArcher.rotation.x, transformArcher.rotation.y, transformArcher.rotation.z);
+        positionSpawnFleche = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + 0.5f);
+        rotationFleche = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
     }
 
     // Update is called once per frame
@@ -34,18 +33,21 @@ public class Archer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (tempsAnimation < cptrAnim && !flecheIsRunning)
+        if (tempsAnimation <= cptrAnim && flecheIsRunning == false)
         {
             flecheIsRunning = true;
-            instanceDeFleche = Instantiate<GameObject>(Fleche, positionSpawnFleche, Quaternion.LookRotation(rotationFleche));
-            Debug.Log("Instance de fleche : " + instanceDeFleche.name);
-            Debug.Log("Position spawn : " + positionSpawnFleche);
+            instanceDeFleche = Instantiate<GameObject>(fleche, positionSpawnFleche, Quaternion.LookRotation(rotationFleche));
             cptrAnim = 0;
+            Debug.Log("Instance de fleche: " + instanceDeFleche);
         }
-        if (instanceDeFleche.transform.position.z <= 4.0f && flecheIsRunning)
+        if ( flecheIsRunning)
         {
-            Destroy(instanceDeFleche);
-            flecheIsRunning = false;
+            if(instanceDeFleche.transform.position.z <= 4.0f)
+            {
+                Destroy(instanceDeFleche);
+                flecheIsRunning = false;
+            }
+            
         }
     }
 }

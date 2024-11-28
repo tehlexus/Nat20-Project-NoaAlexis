@@ -41,17 +41,20 @@ public class Monster : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log("Position Spawn Monstre : " + positionSpawnBouleDeFeu);
-        if (tempsAnimation < cptrAnim && FireBallIsRunning == false)
+        if (tempsAnimation <= cptrAnim && FireBallIsRunning == false)
         {
             FireBallIsRunning = true;
             instanceBouleDeFeu = Instantiate<GameObject>(bouleDeFeu, positionSpawnBouleDeFeu, Quaternion.LookRotation(rotationBouleDeFeu));
             cptrAnim = 0;
+            Debug.Log("InstanceBouleDeFeu: " + instanceBouleDeFeu);
         }
-        if (instanceBouleDeFeu.transform.position.z <= -5.0f && FireBallIsRunning)
+        if (FireBallIsRunning)
         {
-            Destroy(instanceBouleDeFeu);
-            FireBallIsRunning = false;
+            if(instanceBouleDeFeu.transform.position.z <= -5.0f)
+            {
+                Destroy(instanceBouleDeFeu);
+                FireBallIsRunning = false;
+            }
         }
     }
 }
