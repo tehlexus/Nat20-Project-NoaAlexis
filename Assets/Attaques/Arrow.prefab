@@ -96,6 +96,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5236260034579901511}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4fa68e0d267fb454bafd0a157c2526ce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1931996811842789924}
   m_SourcePrefab: {fileID: 100100000, guid: 4fa68e0d267fb454bafd0a157c2526ce, type: 3}
 --- !u!1 &13544569289764046 stripped
 GameObject:
@@ -130,3 +134,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1931996811842789924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13544569289764046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3155401926b4c584c881660569c8532b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
