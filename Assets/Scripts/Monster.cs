@@ -41,6 +41,7 @@ public class Monster : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Debug.Log("Position Spawn Monstre : " + positionSpawnBouleDeFeu);
         if (tempsAnimation < cptrAnim && FireBallIsRunning == false)
         {
             FireBallIsRunning = true;

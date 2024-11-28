@@ -21,8 +21,8 @@ public class Archer : MonoBehaviour
         cptrAnim = 0;
         tempsAnimation = animationArcher.GetCurrentAnimatorStateInfo(0).length;
         flecheIsRunning = false;
-        transformArcher = transformArcher.parent;
-        positionSpawnFleche = transformArcher.localPosition;
+        transformArcher = GameObject.Find("Archer").GetComponent<Transform>();
+        positionSpawnFleche = new Vector3(transformArcher.position.x + 0.5f, transformArcher.position.y, transformArcher.position.z + 0.5f);
         rotationFleche = new Vector3(transformArcher.rotation.x, transformArcher.rotation.y, transformArcher.rotation.z);
     }
 
@@ -38,6 +38,8 @@ public class Archer : MonoBehaviour
         {
             flecheIsRunning = true;
             instanceDeFleche = Instantiate<GameObject>(Fleche, positionSpawnFleche, Quaternion.LookRotation(rotationFleche));
+            Debug.Log("Instance de fleche : " + instanceDeFleche.name);
+            Debug.Log("Position spawn : " + positionSpawnFleche);
             cptrAnim = 0;
         }
         if (instanceDeFleche.transform.position.z <= 4.0f && flecheIsRunning)
