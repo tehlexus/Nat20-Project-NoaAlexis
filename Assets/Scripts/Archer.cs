@@ -12,17 +12,17 @@ public class Archer : MonoBehaviour
     private GameObject instanceDeFleche;
     private bool flecheIsRunning;
     private Vector3 positionSpawnFleche;
-    private Vector3 rotationFleche;
+    private Quaternion rotationFleche;
 
     // Start is called before the first frame update
     void Start()
     {
         cptrAnim = 0;
         animationArcher = GetComponent<Animator>();
-        tempsAnimation = animationArcher.GetCurrentAnimatorStateInfo(0).length - 2;
+        tempsAnimation = animationArcher.GetCurrentAnimatorStateInfo(0).length;
         flecheIsRunning = false;
-        positionSpawnFleche = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + 0.5f);
-        rotationFleche = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+        positionSpawnFleche = new Vector3(transform.position.x + 1f, transform.position.y + 1f, transform.position.z + 1f);
+        rotationFleche = new Quaternion(0.6956865f, 0, -0.2705448f, 0.6654516f);
     }
 
     // Update is called once per frame
@@ -36,18 +36,17 @@ public class Archer : MonoBehaviour
         if (tempsAnimation <= cptrAnim && flecheIsRunning == false)
         {
             flecheIsRunning = true;
-            instanceDeFleche = Instantiate<GameObject>(fleche, positionSpawnFleche, Quaternion.LookRotation(rotationFleche));
+            instanceDeFleche = Instantiate<GameObject>(fleche, positionSpawnFleche, rotationFleche);
             cptrAnim = 0;
-            Debug.Log("Instance de fleche: " + instanceDeFleche);
         }
         if ( flecheIsRunning)
-        {
-            if(instanceDeFleche.transform.position.z <= 4.0f)
+        { 
+            if (instanceDeFleche.transform.position.x >= 0f)
             {
                 Destroy(instanceDeFleche);
                 flecheIsRunning = false;
             }
-            
+
         }
     }
 }

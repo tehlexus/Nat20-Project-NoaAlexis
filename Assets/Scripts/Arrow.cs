@@ -15,6 +15,6 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigidBody.AddRelativeForce(new Vector3(_moveSpeed, 0 , _moveSpeed));
+        rigidBody.AddRelativeForce(new Vector3(0, _moveSpeed,0));
     }
 }
