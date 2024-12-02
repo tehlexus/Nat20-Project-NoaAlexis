@@ -46,7 +46,6 @@ public class Monster : MonoBehaviour
             FireBallIsRunning = true;
             instanceBouleDeFeu = Instantiate<GameObject>(bouleDeFeu, positionSpawnBouleDeFeu, Quaternion.LookRotation(rotationBouleDeFeu));
             cptrAnim = 0;
-            Debug.Log("InstanceBouleDeFeu: " + instanceBouleDeFeu);
         }
         if (FireBallIsRunning)
         {
