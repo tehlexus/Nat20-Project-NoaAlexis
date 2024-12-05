@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
     bool gameIsRunning;
-    bool playerIsGrounded;
-    bool playerIsJumping;
+    public bool playerIsGrounded;
+    public bool playerIsJumping;
     private float deplacementHorizontal;
     private float deplacementVertical;
     private Vector3 deplacementVector;
@@ -22,8 +23,19 @@ public class Player : MonoBehaviour
     private float rotationSpeed;
     public bool inversionY;
 
+    public bool isPlayerReset;
+    public float positionX;
+    public float positionY;
+    public float positionZ;
+
     void Start()
     {
+        positionX = -830.1577f;
+        positionY = -239.062f;
+        positionZ = -763.7468f;
+
+        isPlayerReset = false;
+
         rigidBody = GetComponent<Rigidbody>();
         gameIsRunning = false;
         playerIsJumping = false;
@@ -50,6 +62,15 @@ public class Player : MonoBehaviour
         if (playerIsGrounded && !playerIsJumping && Input.GetKeyDown(KeyCode.Space))
         {
             playerIsJumping = true;
+        }
+
+        if (isPlayerReset)
+        {
+            positionX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
+            positionY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
+            positionZ = GameObject.FindGameObjectWithTag("Player").transform.position.z;
+
+            isPlayerReset = false;
         }
 
         deplacementHorizontal = Input.GetAxis("Horizontal");

@@ -901,7 +901,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f704901a760c97d48a6d35e261e0e91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerIsGrounded: 0
+  playerIsJumping: 0
   inversionY: 0
+  isPlayerReset: 0
+  positionX: 0
+  positionY: 0
+  positionZ: 0
 --- !u!54 &193754624
 Rigidbody:
   m_ObjectHideFlags: 0

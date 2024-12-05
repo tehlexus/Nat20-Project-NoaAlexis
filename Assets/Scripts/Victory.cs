@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
