@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,16 +24,18 @@ public class Player : MonoBehaviour
     private float rotationSpeed;
     public bool inversionY;
 
-    public bool isPlayerReset;
-    public float positionX;
-    public float positionY;
-    public float positionZ;
+    private bool isPlayerReset;
+    private float positionX;
+    private float positionY;
+    private float positionZ;
+
+    AudioSource sourceAudio;
 
     void Start()
     {
-        positionX = -830.1577f;
-        positionY = -239.062f;
-        positionZ = -763.7468f;
+        positionX = 1.46f;
+        positionY = 10.03f;
+        positionZ = -8.27f;
 
         isPlayerReset = false;
 
@@ -53,6 +56,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        inversionY = GameManager.Instance.invertYAxis;
         if (!gameIsRunning && rigidBody.velocity.y == 0)
         {
             gameIsRunning = true;
@@ -66,9 +70,9 @@ public class Player : MonoBehaviour
 
         if (isPlayerReset)
         {
-            positionX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-            positionY = GameObject.FindGameObjectWithTag("Player").transform.position.y;
-            positionZ = GameObject.FindGameObjectWithTag("Player").transform.position.z;
+            GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(positionX, positionY, positionZ);
+            sourceAudio = GetComponent<AudioSource>();
+            sourceAudio.Play();
 
             isPlayerReset = false;
         }
@@ -120,5 +124,23 @@ public class Player : MonoBehaviour
     void invertYAxis()
     {
         inversionY = !inversionY;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.name);
+
+        switch(other.gameObject.name)
+        {
+            case "FireBall(Clone)":
+            case "StonesHit(Clone)":
+            case "MeteorsAttaque(Clone)":
+            case "electroSlash(Clone)":
+            case "Arrow(Clone)":
+                isPlayerReset = true;
+                break;
+            default:
+                break;
+        }
     }
 }

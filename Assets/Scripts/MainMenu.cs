@@ -11,12 +11,12 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        invertYAxisToggle.isOn = GameManager.Instance.invertYAxis;
+            invertYAxisToggle.isOn = GameManager.Instance.invertYAxis;
 
-        invertYAxisToggle.onValueChanged.AddListener((value) =>
-        {
-            GameManager.Instance.invertYAxis = value;
-        });
+            invertYAxisToggle.onValueChanged.AddListener((value) =>
+            {
+                GameManager.Instance.invertYAxis = value;
+            });
     }
 	
     public void PlayGame()
