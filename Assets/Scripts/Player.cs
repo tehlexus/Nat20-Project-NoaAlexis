@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
             sourceAudio = GetComponent<AudioSource>();
             sourceAudio.Play();
 
+            GameManager.Instance.deathCmpt += 1;
+
             isPlayerReset = false;
         }
 
