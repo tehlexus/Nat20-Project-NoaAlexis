@@ -42,12 +42,12 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         gameIsRunning = false;
         playerIsJumping = false;
-        playerIsGrounded = false;
+        playerIsGrounded = true;
         deplacementHorizontal = 0f;
         deplacementVertical = 0f;
 
         rotationX = 0f;
-        speed = 150f;
+        speed = 200f;
         rotationSpeed = 200.0f;
 
         cameraPrincipale = GameObject.Find("Main Camera").GetComponent<Camera>();
