@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         deplacementVertical = 0f;
 
         rotationX = 0f;
-        speed = 250f;
+        speed = 150f;
         rotationSpeed = 200.0f;
 
         cameraPrincipale = GameObject.Find("Main Camera").GetComponent<Camera>();
